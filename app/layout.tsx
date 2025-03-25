@@ -1,6 +1,8 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +29,25 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header className="border-b">
+          <nav className="max-w-7xl mx-auto flex items-center justify-between p-4">
+            <Link href="/" className="text-2xl font-bold">
+              Home
+            </Link>
+            <ul className="flex items-center space-x-4">
+              {Array.from({ length: 10 }, (_, i) => (
+                <li key={i + 1}>
+                  <Link
+                    href={`/dynamic/${i + 1}`}
+                    className="hover:text-blue-600 transition-colors px-2 py-1 rounded-md hover:bg-gray-100"
+                  >
+                    Page {i + 1}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </header>
         {children}
       </body>
     </html>
